@@ -1,0 +1,72 @@
+<!DOCTYPE html> 
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Carrinho de Compras</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container" style="max-width: 800px; margin: auto; padding: 20px; background: #fff; border-radius: 12px;">
+    <h1 style="text-align: center;">Seu Carrinho</h1>
+    
+    <div id="cart-items" style="margin-top: 20px;"></div>
+    
+    <div class="total-finalizar" style="margin-top: 20px; display: flex; justify-content: flex-end; align-items: center; gap: 20px;">
+      <strong style="font-size: 16px;">Total: R$ <span id="total">0,00</span></strong>
+      <button id="finalizar-btn" class="finalizar-btn" style="background-color: #007bff; color: white; border: none; padding: 10px 16px; border-radius: 6px; cursor: pointer; font-size: 16px;">
+        Finalizar Compra
+      </button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <div id="toqueSecreto"></div>
+  <script>
+    // Função para pedir a senha e ir para o estoque
+    function acessarEstoque() {
+      const senha = prompt("Digite a senha:");
+      if (senha === "1234") { // Troque pela sua senha
+        window.location.href = "estoque.html";
+      } else {
+        alert("Senha incorreta!");
+      }
+    }
+  
+    // ---- Acesso via teclado (PC) ----
+    document.addEventListener("keydown", function (e) {
+      if (e.ctrlKey && e.altKey && e.shiftKey && e.key === "ArrowLeft") {
+        acessarEstoque();
+      }
+    });
+  
+    // ---- Acesso via toque (Celular) ----
+    let toqueContador = 0;
+    let ultimoToque = 0;
+  
+    document.addEventListener("touchstart", function (e) {
+      const toque = e.touches[0];
+      const largura = window.innerWidth;
+      const altura = window.innerHeight;
+  
+      // Verifica se tocou no canto superior esquerdo
+      if (toque.clientX < largura * 0.15 && toque.clientY < altura * 0.15) {
+        const agora = new Date().getTime();
+        if (agora - ultimoToque < 800) {
+          toqueContador++;
+        } else {
+          toqueContador = 1;
+        }
+        ultimoToque = agora;
+  
+        if (toqueContador === 5) {
+          acessarEstoque();
+          toqueContador = 0;
+        }
+      }
+    });
+  </script>
+  
+</body>
+</html>
+

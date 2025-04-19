@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Administração de Estoque</title>
+  <link rel="stylesheet" href="estoque.css" />
+</head>
+<body>
+  <h1>Administração de Estoque</h1>
+
+  <form id="formulario">
+    <input type="text" id="nome" placeholder="Nome do Produto" required />
+    <input type="text" id="descricao" placeholder="Descrição do Produto" required />
+    <input type="number" id="preco" placeholder="Preço" step="0.01" required />
+    <input type="url" id="imagem" placeholder="URL da Imagem" required />
+    <input type="number" id="quantidade" placeholder="Quantidade em Estoque" required />
+    <button type="submit">Salvar Produto</button>
+    <input type="hidden" id="editandoIndice" />
+  </form>
+
+  <div id="lista-produtos"></div>
+
+  <script src="estoque.js"></script>
+</body>
+</html>
